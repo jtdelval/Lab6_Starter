@@ -74,19 +74,18 @@ function initFormHandler() {
   
   // B3. TODO - Add an event listener for the 'submit' event, which fires when the
   //            submit button is clicked
-  form.addEventListener("submit", (data) => {
-
+  form.addEventListener("submit", (event) => {
   
 
   // Steps B4-B9 will occur inside the event listener from step B3
   // B4. TODO - Create a new FormData object from the <form> element reference above
-  const formData = new FormData(data);
+  const formData = new FormData(form);
   // B5. TODO - Create an empty object (I'll refer to this object as recipeObject to
   //            make this easier to read), and then extract the keys and corresponding
   //            values from the FormData object and insert them into recipeObject
   let recipeObject = {};
   for (const key of formData.keys()) {
-    recipeObject[key] = formData.key;
+    recipeObject[key] = formData.get(key);
   }
 
   // B6. TODO - Create a new <recipe-card> element
@@ -100,7 +99,7 @@ function initFormHandler() {
   //            then save the recipes array back to localStorage
   let recipesdata = localStorage.getItem("recipes");
   let recipes = JSON.parse(recipesdata);
-  recipes.append(recipeObject);
+  recipes.push(recipeObject);
   localStorage.setItem("recipes", JSON.stringify(recipes));
 
 
